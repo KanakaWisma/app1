@@ -1,0 +1,158 @@
+basePath: /
+definitions:
+  models.Jurusan:
+    properties:
+      fakultas:
+        type: string
+      idjurusan:
+        type: integer
+      jenjang:
+        type: string
+      namaJurusan:
+        type: string
+    type: object
+  models.Mahasiswa:
+    properties:
+      alamat:
+        type: string
+      id:
+        type: integer
+      idjurusan:
+        type: integer
+      jurusan:
+        $ref: '#/definitions/models.Jurusan'
+      nama:
+        type: string
+      nim:
+        type: string
+      tglLahir:
+        type: string
+      umur:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API CRUD Mahasiswa dan Jurusan
+  title: Kampus API
+  version: "1.0"
+paths:
+  /jurusan:
+    get:
+      description: Menampilkan seluruh data jurusan
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Jurusan'
+            type: array
+      summary: Ambil semua jurusan
+      tags:
+      - Jurusan
+  /mahasiswa:
+    get:
+      description: Menampilkan seluruh data mahasiswa
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Mahasiswa'
+            type: array
+      summary: Ambil semua mahasiswa
+      tags:
+      - Mahasiswa
+    post:
+      consumes:
+      - application/json
+      description: Menambahkan data mahasiswa baru
+      parameters:
+      - description: Data Mahasiswa
+        in: body
+        name: mahasiswa
+        required: true
+        schema:
+          $ref: '#/definitions/models.Mahasiswa'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Mahasiswa'
+      summary: Tambah mahasiswa
+      tags:
+      - Mahasiswa
+  /mahasiswa/{id}:
+    delete:
+      description: Menghapus data mahasiswa berdasarkan ID
+      parameters:
+      - description: ID Mahasiswa
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Hapus mahasiswa
+      tags:
+      - Mahasiswa
+    put:
+      consumes:
+      - application/json
+      description: Mengubah data mahasiswa berdasarkan ID
+      parameters:
+      - description: ID Mahasiswa
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Data Mahasiswa
+        in: body
+        name: mahasiswa
+        required: true
+        schema:
+          $ref: '#/definitions/models.Mahasiswa'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Mahasiswa'
+      summary: Update mahasiswa
+      tags:
+      - Mahasiswa
+  /search:
+    get:
+      description: Mencari mahasiswa berdasarkan nama
+      parameters:
+      - description: Nama Mahasiswa
+        in: query
+        name: search
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Mahasiswa'
+            type: array
+      summary: Cari mahasiswa
+      tags:
+      - Mahasiswa
+swagger: "2.0"

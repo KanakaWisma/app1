@@ -6,3 +6,7 @@ type Jurusan struct {
 	Fakultas    string
 	Jenjang     string
 }
+
+func (Jurusan) TableName() string {
+	return "jurusan"
+}

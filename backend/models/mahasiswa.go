@@ -8,6 +8,8 @@ type Mahasiswa struct {
 	TglLahir  string
 	Alamat    string
 	IDJurusan uint
+
+	Jurusan Jurusan `gorm:"foreignKey:IDJurusan"`
 }
 
 func (Mahasiswa) TableName() string {
