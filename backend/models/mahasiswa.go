@@ -9,7 +9,7 @@ type Mahasiswa struct {
 	Alamat    string
 	IDJurusan uint
 
-	Jurusan Jurusan `gorm:"foreignKey:IDJurusan"`
+	Jurusan Jurusan `gorm:"foreignKey:IDJurusan;references:IDJurusan"`
 }
 
 func (Mahasiswa) TableName() string {

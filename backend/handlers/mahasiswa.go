@@ -87,8 +87,9 @@ func UpdateMahasiswa(c *gin.Context) {
 
 	config.DB.Model(&mahasiswa).Updates(input)
 
-	c.JSON(200, mahasiswa)
-
+	c.JSON(200, gin.H{
+		"message": "Data berhasil diupdate",
+	})
 }
 
 // DeleteMahasiswa godoc
